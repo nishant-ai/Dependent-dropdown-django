@@ -1,0 +1,53 @@
+{% extends "location/base.html" %}
+{% load static %}
+
+{% block title %}
+  User Table
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/table.css' %}">
+
+<section>
+  <h1>User Table</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>D.O.B</th>
+              <th>Country</th>
+              <th>State</th>
+              <th>District</th>
+              <th>City</th>
+          </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+          {% for person in people %}
+          <tr>
+              <td>{{person.name}}</td>
+              <td>{{person.birthdate}}</td>
+              <td>{{person.country}}</td>
+              <td>{{person.state}}</td>
+              <td>{{person.district}}</td>
+              <td>{{person.city}}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <button class="goto-home-btn" ><a class="goto-home" href="{% url 'home-view' %}">Add User</a></button>
+</section>
+
+<script>
+  $(window).on("load resize ", function() {
+    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+    $('.tbl-header').css({'padding-right':scrollWidth});
+  }).resize();
+  </script>
+
+{% endblock content %}
