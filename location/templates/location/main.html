@@ -1,0 +1,62 @@
+{% extends "location/base.html" %}
+{% load static %}
+
+{% block title %}
+  Add Person
+{% endblock title %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+<form id="person-form" class="form-main" action="" method="POST" get-states="{% url 'get-states' %}" get-districts="{% url 'get-districts' %}" get-cities="{% url 'get-cities' %}" > {% csrf_token %}
+    <center><h1>Add User</h1></center>
+    {% if message %}
+        <center><p>{{message}}</p></center>
+    {% endif %}
+
+    <label id="form-label" for="name">Name</label>
+    <input id="form-input" name="name" type="name">
+
+    <label id="form-label" for="birthdate">Birthdate</label>
+    <input id="form-input" name="birthdate" type="date">
+
+    <label id="form-label" for="country">Country</label>
+    <select class="form-select" name="form-country" id="country">
+        {% for c in country %}
+            <option id="form-select-option" value="{{c.id}}">{{c}}</option>
+        {% endfor %}
+    </select>
+
+    <label id="form-label" for="state">State</label>
+    <select class="form-select" name="form-state" id="state">
+        {% for s in state %}
+            <option id="form-select-option" value="{{s}}">{{s}}</option>
+        {% endfor %}
+    </select>
+
+    <label id="form-label" for="district">District</label>
+    <select class="form-select" name="form-district" id="district">
+        {% for d in district %}
+            <option id="form-select-option" value="{{d}}">{{d}}</option>
+        {% endfor %}
+    </select>
+
+    <label id="form-label" for="city">City</label>
+    <select class="form-select" name="form-city" id="city">
+        {% for ct in city %}
+            <option id="form-select-option" value="{{ct}}">{{ct}}</option>
+        {% endfor %}
+    </select>
+
+    <button id="form-btn" type="submit">Create User</button>
+    <center><a id="form-btn" href="{% url 'user-table' %}">User Table</a></center>
+
+    <p id="note">*please select upper fields first to select from fields below</p>
+
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static "js/main.js" %}"></script>
+{% endblock content %}
